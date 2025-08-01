@@ -1,0 +1,38 @@
+Prestador de serviço de evento
+
+Cada prestador deve controlar seus clientes, eventos, orçamentos, faturamentos, calendário de eventos
+
+
+Entidades do banco de dados:
+    Clientes:
+    - id
+    - nome
+    - telefone
+
+    Eventos
+     - id
+     - dia de início
+     - hora de início
+     - dia de fim
+     - hora de fim
+     - cliente_id
+     - local
+     - status (cancelado, pendente, concluído) (se for cancelado, não tem orçamento)
+
+    Orçamentos:
+     - id
+     - valor do orçamento
+     - evento_id
+     - data de criação
+     - status (pago, atrasado, em andamento)
+
+    Faturamento:
+     - id, 
+     - orçamento_id
+     - vencimento
+     - valor_fatura
+     - status (em andamento, atrasado e pago)
+     - data de pagamento
+ 
+O faturamento registra as prestações do orçamento. Cada fatura tem vencimento.
+
