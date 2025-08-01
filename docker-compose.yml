@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:17
+    container_name: db_gerenciador_clientes
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - postgres_db:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+    networks:
+      - private
+
+  web:
+    build: .
+    container_name: django_gerenciador_clientes
+    depends_on:
+      - db
+    ports:
+      - "8001:8000"
+    restart: always
+    volumes: 
+      - ./src:/app
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DEBUG: ${DEBUG}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+    command: >
+      sh -c "python manage.py makemigrations &&
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - public
+      - private
+
+networks:
+  private:
+    driver: bridge
+  public:
+    driver: bridge
+volumes:
+  postgres_db:
