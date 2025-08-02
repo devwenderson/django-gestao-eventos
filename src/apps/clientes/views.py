@@ -2,17 +2,17 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from apps.clientes.models import Cliente
-from apps.clientes.serializers import ClienteSerializer
+from apps.clientes.serializers import ClienteReadSerializer, ClienteWriteSerializer
 
 @api_view(["GET", "POST"])
 def clientes_list(request):
     if request.method == "GET":
         clientes = Cliente.objects.all()
-        serializer = ClienteSerializer(clientes, many=True)
+        serializer = ClienteReadSerializer(clientes, many=True)
         return Response(serializer.data)
 
     if request.method == "POST":
-        serializer = ClienteSerializer(data=request.data)
+        serializer = ClienteWriteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -26,11 +26,11 @@ def clientes_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     if request.method == "GET":
-        serializer = ClienteSerializer(cliente)
+        serializer = ClienteReadSerializer(cliente)
         return Response(serializer.data)
     
     elif request.method == "PUT":
-        serializer = ClienteSerializer(cliente, data=request.data)
+        serializer = ClienteWriteSerializer(cliente, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
