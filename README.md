@@ -29,3 +29,4 @@ docker compose up
 - [Django](https://docs.djangoproject.com/en/5.2/)
 - [Django Rest Framework](https://www.django-rest-framework.org/)
 - [Instalação do Docker](https://docs.docker.com/engine/install/)
+- [Uso efetivo de serializers](https://testdriven.io/blog/drf-serializers/)
