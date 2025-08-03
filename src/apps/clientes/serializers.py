@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from apps.clientes.models import Cliente
-from apps.eventos.serializers import EventoReadSerializer
-
 from apps.eventos.models import Evento
 
 class ClienteReadSerializer(serializers.ModelSerializer):
