@@ -28,6 +28,11 @@ class Evento(models.Model):
     def save(self, *args, **kwargs):
         if not(self.nome) and self.cliente:
             self.nome = f"Evento de {self.cliente.nome}"
+            
+        if self.status == "cancelado" and self.orcamento:
+            orcamento = self.orcamento.get()
+            orcamento.status = "cancelado"
+            orcamento.save()
         super().save(*args, **kwargs)
 
 
