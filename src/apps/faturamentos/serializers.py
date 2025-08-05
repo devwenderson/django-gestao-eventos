@@ -9,4 +9,4 @@ class FaturamentoWriteSerializer(serializers.ModelSerializer):
 class FaturamentoReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Faturamento
-        fields = ["id", "orcamento", "data_vencimento", "data_pagamento"]
+        fields = ["id", "orcamento", "valor", "data_vencimento", "data_pagamento"]

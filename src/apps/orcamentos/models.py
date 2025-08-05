@@ -1,5 +1,7 @@
+from datetime import date 
 from django.db import models
 from apps.eventos.models import Evento
+
 
 class Orcamento(models.Model):
     STATUS_CHOICES = [
@@ -20,6 +22,18 @@ class Orcamento(models.Model):
         ordering = ["-data_criacao"]
         db_table = "tb_orcamentos"
 
+    def save(self, *args, **kwargs):
+        if self.numero_faturamentos:
+            valor = self.valor / self.numero_faturamentos
+            data = date.today() 
+            for i in range(1, self.numero_faturamentos+1):
+                faturamento = self.faturamentos.create(
+                    orcamento=self.id,
+                    data_vencimento=f"{data.year}-{data.month+i}-{data.day}",
+                    valor=valor
+                )
+                faturamento.save()     
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Orçamento {self.id}: {self.evento.nome}"
