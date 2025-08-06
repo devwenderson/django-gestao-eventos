@@ -8,7 +8,7 @@ class Faturamento(models.Model):
         ("atrasado", "Atrasado")
     ]
     orcamento = models.ForeignKey(Orcamento, on_delete=models.CASCADE, related_name="faturamentos")
-    data_vencimento = models.DateField(verbose_name="Data de vencimento", auto_now_add=True)
+    data_vencimento = models.DateField(verbose_name="Data de vencimento")
     data_pagamento = models.DateField(verbose_name="Data de pagamento", null=True, blank=True)
     status = models.CharField(verbose_name="Status", max_length=15, choices=STATUS_CHOICES)
     valor = models.DecimalField(verbose_name="Valor", max_digits=10, decimal_places=2)

@@ -19,7 +19,7 @@ class OrcamentoReadSerializer(serializers.ModelSerializer):
     class FaturamentoOrcamentoList(serializers.ModelSerializer):
         class Meta:
             model = Faturamento
-            fields = ["id", "orcamento", "valor", "data_vencimento", "data_pagamento"]
+            fields = ["id", "orcamento", "valor", "status", "data_vencimento", "data_pagamento"]
 
     evento = EventoOrcamentoList(read_only=True)
     faturamentos = FaturamentoOrcamentoList(many=True, read_only=True)
