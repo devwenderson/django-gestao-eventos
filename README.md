@@ -11,7 +11,7 @@ Este sistema foi criado para avaliação para entrar em um projeto acadêmico no
 ## Instalação
 Clone o repositório
 ```shell
-git clone <link_do_repositório>
+git clone https://github.com/devwenderson/django-gestao-eventos.git
 ```
 
 Execute o docker compose
