@@ -33,8 +33,6 @@ services:
       DEBUG: ${DEBUG}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
-    command: >
-      sh -c "ls -la && ls -la /"
     networks:
       - public
       - private
