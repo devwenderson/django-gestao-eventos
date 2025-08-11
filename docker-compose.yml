@@ -34,9 +34,7 @@ services:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
     command: >
-      sh -c "python manage.py makemigrations &&
-            python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8000"
+      sh -c "ls -la && ls -la /"
     networks:
       - public
       - private
@@ -46,5 +44,7 @@ networks:
     driver: bridge
   public:
     driver: bridge
+
 volumes:
   postgres_db:
+  

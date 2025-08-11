@@ -1,4 +1,4 @@
-FROM python:3.11.5-slim-bullseye
+FROM python:3.13-alpine
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -11,4 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./src .
 
-EXPOSE 8000
+COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["sh","/entrypoint.sh"]
