@@ -24,6 +24,7 @@ services:
     restart: always
     volumes: 
       - ./src:/app
+      - static:/static
     environment:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
@@ -36,13 +37,23 @@ services:
     networks:
       - public
       - private
+  
+  nginx:
+    build: ./nginx
+    ports:
+      - "81:80"
+    depends_on:
+      - web
+    networks:
+      - public
+    volumes:
+      - static:/static
 
 networks:
   private:
     driver: bridge
   public:
     driver: bridge
-
 volumes:
   postgres_db:
-  
+  static:
